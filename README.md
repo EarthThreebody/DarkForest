@@ -18,4 +18,7 @@ When start reaching, been discovered
 资源:初始固定:随着tech增高加快消耗,攻击时大量消耗(因此需要探索并吞并敌人)
 spend resource to: hide, explore
 
+//Player can choose explore, develop, hide, do nothing etc. Comsuming diff resources respectively
+
+
 -->
