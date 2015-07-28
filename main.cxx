@@ -16,7 +16,7 @@ int main(){
     //Player can choose explore, develop, hide, do nothing etc. Comsuming diff resources respectively
     //When exploring, have chance to find resources(higher tech, higher possibility)
 
-    std::cout<<"-----------------------"<<std::endl;
+    std::cout<<"------------------------"<<std::endl;
 
     if(sun.dead() || three_body.dead())
       break;
