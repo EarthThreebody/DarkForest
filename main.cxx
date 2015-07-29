@@ -13,8 +13,11 @@ int main(){
     sun.takeAction(three_body);
     three_body.takeAction(sun);
 
-    //Player can choose explore, develop, hide, do nothing etc. Comsuming diff resources respectively
+    //Can choose explore, develop, hide, do nothing etc. Comsuming diff resources respectively
     //When exploring, have chance to find resources(higher tech, higher possibility)
+
+    //TODO:Use absolute position rather than 2D position? random generate distance
+    //TODO:static map/set to save all solar objects
 
     std::cout<<"------------------------"<<std::endl;
 
