@@ -3,8 +3,33 @@
 #include <sstream>
 #include <cstdlib>
 #include <ctime>
-#include "boost/random.hpp"
-#include "boost/generator_iterator.hpp"
+
+namespace SolarSystemTool{
+  void log(std::string out){
+    std::cout<<out<<std::endl;
+  };
+
+  void log(){
+    std::cout<<std::endl;
+  };
+
+  template <typename T> std::string toString(T value){
+    std::ostringstream os ;
+    os << value ;
+    return os.str() ;
+  };
+
+  int genRandom(const int & min, const int & max){
+    return 1;//TODO
+  };
+}
+
+namespace SolarSystemAction{
+  const int DEVELOP = 1;
+  const int EXPLORE = 2;
+  const int NUM_OF_ACT = 2;
+}
+
 
 SolarSystem::SolarSystem(const std::string & name, const bool & is_player){
   m_name = name;
@@ -29,9 +54,11 @@ void SolarSystem::init(){
   m_develop_speed =  double(std::rand()%10) / 5 + 1;
   m_explore_range = 0.0;
 
-  log("["+m_name+"] is in the Dark Forest...");
-  log("-------------------------------------------");
-  report();
+  SolarSystemTool::log("["+m_name+"] is in the Dark Forest...");
+  SolarSystemTool::log("-------------------------------------------");
+
+  if(m_is_player)
+    report();
 }
 
 void SolarSystem::takeAction(SolarSystem & other){
@@ -39,10 +66,10 @@ void SolarSystem::takeAction(SolarSystem & other){
     act(other); return;
   }
 
-  log("["+m_name+"] decide to:");
-  log("("+to_string(SolarSystemAction::DEVELOP)+") develop tech");
-  log("("+to_string(SolarSystemAction::EXPLORE)+") explore the space");
-  log("(other) random");
+  SolarSystemTool::log("["+m_name+"] decide to:");
+  SolarSystemTool::log("("+SolarSystemTool::toString(SolarSystemAction::DEVELOP)+") develop tech");
+  SolarSystemTool::log("("+SolarSystemTool::toString(SolarSystemAction::EXPLORE)+") explore the space");
+  SolarSystemTool::log("(other) random");
   int act_num;
   std::cin>>act_num;
   act(other,act_num);
@@ -67,10 +94,6 @@ void SolarSystem::act(SolarSystem & other){
   act(other,i);
 }
 
-int SolarSystem::genRandom(const int & min, const int & max){
-  return 1;//TODO
-}
-
 void SolarSystem::develop(){
   m_resource      -= m_develop_speed;
   m_tech          += m_develop_speed;
@@ -90,59 +113,42 @@ void SolarSystem::explore(SolarSystem & other){
 
   if((m_explore_range*m_explore_range)>distance){
     if(m_tech > other.m_tech){
-      log("["+m_name+"] distroyed ["+other.m_name+"]");
+      SolarSystemTool::log("["+m_name+"] distroyed ["+other.m_name+"]");
       m_resource += other.m_resource;
       other.m_resource = 0;
     } else {
-      log("["+other.m_name+"] distroyed ["+m_name+"]");
+      SolarSystemTool::log("["+other.m_name+"] distroyed ["+m_name+"]");
     }
   }
 }
 
 void SolarSystem::report(std::string new_report){
-  log();
+  SolarSystemTool::log();
   new_report = "["+m_name+"] "+new_report;
   reportDetail();
-  log(new_report);
-  log();
+  SolarSystemTool::log(new_report);
+  SolarSystemTool::log();
 }
 
 void SolarSystem::report(){
   reportDetail();
-  log();
+  SolarSystemTool::log();
 }
 
 void SolarSystem::reportDetail(){
-  log("Name:        ["+m_name+"]");
-  log("Player:      ["+(m_is_player? std::string("Yes"):std::string("No"))+"]");
-  log("Position:    ["+to_string(m_position.x)+","+to_string(m_position.y)+"]");
-  log("Tech:        ["+to_string(m_tech)+"]");
-  log("Resource:    ["+to_string(m_resource)+"]");
-  log("DevelopSpeed:["+to_string(m_develop_speed)+"]");
-  log("ExploreRange:["+to_string(m_explore_range)+"]");
+  SolarSystemTool::log("Name:        ["+m_name+"]");
+  SolarSystemTool::log("Player:      ["+(m_is_player? std::string("Yes"):std::string("No"))+"]");
+  SolarSystemTool::log("Position:    ["+SolarSystemTool::toString(m_position.x)+","+SolarSystemTool::toString(m_position.y)+"]");
+  SolarSystemTool::log("Tech:        ["+SolarSystemTool::toString(m_tech)+"]");
+  SolarSystemTool::log("Resource:    ["+SolarSystemTool::toString(m_resource)+"]");
+  SolarSystemTool::log("DevelopSpeed:["+SolarSystemTool::toString(m_develop_speed)+"]");
+  SolarSystemTool::log("ExploreRange:["+SolarSystemTool::toString(m_explore_range)+"]");
 }
-
-void SolarSystem::log(std::string out){
-  std::cout<<out<<std::endl;
-}
-
-void SolarSystem::log(){
-  std::cout<<std::endl;
-}
-
-
-template <typename T> std::string SolarSystem::to_string(T value){
-  std::ostringstream os ;
-  os << value ;
-  return os.str() ;
-}
-
 
 bool SolarSystem::dead(){
   if(m_resource<=0){
-    log("["+m_name+"] is destroyed.");
+    SolarSystemTool::log("["+m_name+"] is destroyed.");
     return true;
   }
   return false;
 }
-
