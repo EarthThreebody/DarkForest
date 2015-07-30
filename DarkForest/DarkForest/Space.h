@@ -1,18 +1,18 @@
 #ifndef SPACE_H_INCLUDED
 #define SPACE_H_INCLUDED
 
-#include <map>
 #include <iostream>
-#include <cstdlib>
-#include <ctime>
+#include <vector>
+#include <map>
 
 #include "SystemTool.h"
 
 class SolarSystem;
 
 namespace{
-	typedef std::map<double,SolarSystem *> SpaceMap;
-	typedef std::map<double,SolarSystem *>::value_type SpaceMapValue;
+	typedef SolarSystem * SolarSystemPtr;
+	typedef std::map<double,SolarSystemPtr> SpaceMap;
+	typedef std::map<double,SolarSystemPtr>::value_type SpaceMapValue;
 }
 
 class Space{
@@ -21,7 +21,8 @@ private:
 
 public:
 	void SPaceMap();
-	void getIn(SolarSystem * in);
+	void getIn(SolarSystemPtr in);
+	bool searchAround(SolarSystemPtr self,std::vector<SolarSystemPtr> & neighbours);
 };
 
 

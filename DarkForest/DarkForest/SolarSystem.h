@@ -31,6 +31,7 @@ public:
 	void act(SolarSystem & other);
 	void setPosition(const double position){m_position = position;};
 	double getPosition(){return m_position;};
+	double getExploreRange(){return m_explore_range;};
 	std::string getName(){return m_name;};
 	bool dead();
 

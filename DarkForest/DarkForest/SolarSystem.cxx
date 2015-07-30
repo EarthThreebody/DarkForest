@@ -19,7 +19,7 @@ void SolarSystem::init(){
 	m_explore_range = 0.0;
 
 	SystemTool::logInfo("["+m_name+"] is activated...");
-	SystemTool::logInfo("-------------------------------------------");
+	SystemTool::logInfo("--------------------------------------------------------------");
 
 	if(m_state==SolarSystemState::PLAYER)
 		report();
@@ -29,6 +29,14 @@ void SolarSystem::takeAction(SolarSystem & other){
 	if(m_state==SolarSystemState::UNDEVELOPED){
 		await();
 		return;
+	}
+
+	//TODO find neighbours
+	std::vector<SolarSystem *> neighbours;
+	if(m_space_ptr->searchAround(this,neighbours)){
+		SystemTool::logInfo("TESTING ACTION: ["+m_name+"]"+" get neighbours!!!!");
+	} else {
+		SystemTool::logInfo("TESTING ACTION: ["+m_name+"]"+" not get neighbours!!!!");;
 	}
 
 	if(m_state==SolarSystemState::ENEMY){
@@ -86,6 +94,8 @@ void SolarSystem::explore(SolarSystem & other){
 			other.m_resource = 0;
 		} else {
 			SystemTool::logInfo("["+other.m_name+"] distroyed ["+m_name+"]");
+			other.m_resource += m_resource;
+			m_resource = 0;
 		}
 	}
 }
