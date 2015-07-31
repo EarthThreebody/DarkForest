@@ -18,13 +18,14 @@ namespace SolarSystemState{
 	const int UNDEVELOPED = 3;
 }
 
+
 class Space;
 
 class SolarSystem{
 public:
 	SolarSystem(Space * space_ptr,const std::string & name="Undeveloped",const int state=SolarSystemState::UNDEVELOPED);
 	void develop();
-	void explore(SolarSystem & other);
+	void explore();
 	void takeAction(SolarSystem & other);
 	void await();
 	void act(SolarSystem & other,const int & i);

@@ -31,13 +31,6 @@ void SolarSystem::takeAction(SolarSystem & other){
 		return;
 	}
 
-	//TODO find neighbours
-	std::vector<SolarSystem *> neighbours;
-	if(m_space_ptr->searchAround(this,neighbours)){
-		SystemTool::logInfo("TESTING ACTION: ["+m_name+"]"+" get neighbours!!!!");
-	} else {
-		SystemTool::logInfo("TESTING ACTION: ["+m_name+"]"+" not get neighbours!!!!");;
-	}
 
 	if(m_state==SolarSystemState::ENEMY){
 		act(other); return;
@@ -57,7 +50,7 @@ void SolarSystem::act(SolarSystem & other,const int & i){
 	case SolarSystemAction::DEVELOP :
 		develop(); break;
 	case SolarSystemAction::EXPLORE :
-		explore(other); break;
+		explore(); break;
 	default:
 		act(other);
 	}
@@ -79,22 +72,28 @@ void SolarSystem::develop(){
 	report("Developing...");
 }
 
-void SolarSystem::explore(SolarSystem & other){
+void SolarSystem::explore(){
 	m_explore_range += m_develop_speed;
 
 	report("Exploring...");
 	//TODO: have chance to find resources
 
-	double distance = other.getPosition()-m_position;
 
-	if( (m_explore_range*m_explore_range) > (distance*distance) ){
-		if(m_tech > other.m_tech){
-			SystemTool::logInfo("["+m_name+"] distroyed ["+other.m_name+"]");
-			m_resource += other.m_resource;
-			other.m_resource = 0;
+	//TODO find neighbours
+	std::vector<SolarSystem *> neighbours;
+	if(!m_space_ptr->searchAround(this,neighbours))	{
+		SystemTool::logInfo("["+m_name+"] didn't find anything in the Space.");
+		return;
+	}
+
+	for(std::vector<SolarSystem *>::iterator it=neighbours.begin();it!=neighbours.end();++it){
+		if(m_tech > (*it)->m_tech){
+			SystemTool::logInfo("["+m_name+"] distroyed ["+(*it)->m_name+"]");
+			m_resource += (*it)->m_resource;
+			(*it)->m_resource = 0;
 		} else {
-			SystemTool::logInfo("["+other.m_name+"] distroyed ["+m_name+"]");
-			other.m_resource += m_resource;
+			SystemTool::logInfo("["+(*it)->m_name+"] distroyed ["+m_name+"]");
+			(*it)->m_resource += m_resource;
 			m_resource = 0;
 		}
 	}
@@ -118,24 +117,24 @@ void SolarSystem::report(){
 }
 
 void SolarSystem::reportDetail(){
-	std::string report_state;
+	std::string state_report;
 	switch (m_state)
 	{
 	case SolarSystemState::PLAYER :
-		report_state = "Player";
+		state_report = "Player";
 		break;
 	case SolarSystemState::ENEMY :
-		report_state = "Enemy";
+		state_report = "Enemy";
 		break;
 	case SolarSystemState::UNDEVELOPED :
-		report_state = "Undeveloped";
+		state_report = "Undeveloped";
 		break;
 	default:
 		break;
 	}
 
 	SystemTool::logInfo("Name:        ["+m_name+"]");
-	SystemTool::logInfo("State:       ["+report_state+"]");
+	SystemTool::logInfo("State:       ["+state_report+"]");
 	SystemTool::logInfo("Position:    ["+SystemTool::toString(m_position)+"]");
 	SystemTool::logInfo("Tech:        ["+SystemTool::toString(m_tech)+"]");
 	SystemTool::logInfo("Resource:    ["+SystemTool::toString(m_resource)+"]");
