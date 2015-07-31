@@ -26,10 +26,10 @@ public:
 	SolarSystem(Space * space_ptr,const std::string & name="Undeveloped",const int state=SolarSystemState::UNDEVELOPED);
 	void develop();
 	void explore();
-	void takeAction(SolarSystem & other);
+	void takeAction();
 	void await();
-	void act(SolarSystem & other,const int & i);
-	void act(SolarSystem & other);
+	void act(const int & i);
+	void act();
 	void setPosition(const double position){m_position = position;};
 	double getPosition(){return m_position;};
 	double getExploreRange(){return m_explore_range;};
