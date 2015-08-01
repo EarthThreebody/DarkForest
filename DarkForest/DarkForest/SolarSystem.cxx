@@ -3,12 +3,15 @@
 #include "Space.h"
 
 SolarSystem::SolarSystem(Space * space_ptr,const std::string & name,const int state){
-
 	m_name = name;
-	m_space_ptr = space_ptr;
 	m_state = state;
-	m_space_ptr->getIn(this);
+	if(space_ptr){ joinSpace(space_ptr); };
 	init();
+}
+
+void SolarSystem::joinSpace(Space * space_ptr){
+	m_space_ptr = space_ptr;
+	m_space_ptr->getIn(this);
 }
 
 void SolarSystem::init(){
@@ -31,6 +34,12 @@ void SolarSystem::init(){
 
 void SolarSystem::takeAction(){
 	if(m_resource<=0) return;
+
+	if(m_space_ptr == NULL){
+		SystemTool::logInfo("WARNING! ["+m_name+"] is not in the space." );
+		reportDetail();
+		return;
+	}
 
 	if(m_state==SolarSystemState::UNDEVELOPED){
 		/*await();*/ return;

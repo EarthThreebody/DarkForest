@@ -23,13 +23,16 @@ class Space;
 
 class SolarSystem{
 public:
-	SolarSystem(Space * space_ptr,const std::string & name="Undeveloped",const int state=SolarSystemState::UNDEVELOPED);
+	SolarSystem(Space * space_ptr=NULL,const std::string & name="Undeveloped",const int state=SolarSystemState::UNDEVELOPED);
+
+	void takeAction();
 	void develop();
 	void explore();
-	void takeAction();
 	void await();
 	void act(const int & i);
 	void act();
+	void joinSpace(Space * space_ptr);
+
 	void setPosition(const double position){m_position = position;};
 	double getPosition(){return m_position;};
 	double getExploreRange(){return m_explore_range;};

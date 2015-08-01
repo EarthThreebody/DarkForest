@@ -16,24 +16,12 @@ int main(){
 
 	Space this_space;
 
-	std::vector<SolarSystem> undeveloped_stars;
-	//TODO: make these to be pointer...
-	SolarSystem new_1(&this_space);
-	SolarSystem new_2(&this_space);
-	SolarSystem new_3(&this_space);
-	SolarSystem new_4(&this_space);
-	SolarSystem new_5(&this_space);
-	SolarSystem new_6(&this_space);
-	SolarSystem new_7(&this_space);
-	SolarSystem new_8(&this_space);
-	undeveloped_stars.push_back(new_1);
-	undeveloped_stars.push_back(new_2);
-	undeveloped_stars.push_back(new_3);
-	undeveloped_stars.push_back(new_4);
-	undeveloped_stars.push_back(new_5);
-	undeveloped_stars.push_back(new_6);
-	undeveloped_stars.push_back(new_7);
-	undeveloped_stars.push_back(new_8);
+	std::vector<SolarSystem *> undeveloped_stars_ptr;
+	for(int i=0;i<15;++i){
+		SolarSystem * new_star_ptr = new SolarSystem;
+		new_star_ptr->joinSpace(&this_space);
+		undeveloped_stars_ptr.push_back(new_star_ptr);
+	}
 
 	SolarSystem two_body(&this_space,"TwoBody",SolarSystemState::ENEMY);
 	SolarSystem three_body(&this_space,"ThreeBody",SolarSystemState::ENEMY);
@@ -44,8 +32,8 @@ int main(){
 	while(true){
 		std::cout<<"-----------------------New Report-----------------------------"<<std::endl;
 
-		for(std::vector<SolarSystem>::iterator it=undeveloped_stars.begin();it!=undeveloped_stars.end();++it){
-			it->takeAction();
+		for(std::vector<SolarSystem *>::iterator it=undeveloped_stars_ptr.begin();it!=undeveloped_stars_ptr.end();++it){
+			(*it)->takeAction();
 		}
 
 		three_body.takeAction();
@@ -63,6 +51,9 @@ int main(){
 			break;
 	}
 
+	for(std::vector<SolarSystem *>::iterator it=undeveloped_stars_ptr.begin();it!=undeveloped_stars_ptr.end();++it){
+		delete (*it);
+	}
 	system("PAUSE");
 }
 
