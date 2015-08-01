@@ -13,7 +13,7 @@ TODO:
 
 ## V 1.0.0
 
-<img src="https://github.com/mincongzhang/DarkForest/raw/master/v100.bmp" alt="1" title="1" height="400"/>
+<img src="https://github.com/mincongzhang/DarkForest/raw/master/v100.bmp" alt="1" title="1" width="400"/>
 
 
 
