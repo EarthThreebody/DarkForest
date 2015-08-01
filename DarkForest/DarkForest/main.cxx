@@ -1,6 +1,6 @@
 #ifdef WIN32
 #include <windows>
-#include <stdlib.h>
+
 #endif
 
 #ifndef __MAIN__
@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include <ctime>
+#include <stdlib.h>
 #include "SolarSystem.h"
 #include "Space.h"
 
@@ -41,13 +42,10 @@ int main(){
 		//Can choose explore, develop, hide, do nothing etc. Comsuming diff resources respectively
 		//When exploring, have chance to find resources(higher tech, higher possibility)
 
-		//TODO:Use absolute position rather than 2D position? random generate distance
-		//TODO:static map/set to save all solar objects
-
 		std::cout<<"--------------------------------------------------------------"<<std::endl;
 		system("PAUSE");
 		system("cls");
-		if(sun.dead() || three_body.dead())
+		if(sun.dead() || (three_body.dead()&&two_body.dead()))
 			break;
 	}
 
