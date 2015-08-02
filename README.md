@@ -7,9 +7,10 @@ A game
 
 ## V 1.0.1
 TODO:
-1.add cmd GUI(Position, Tech, Resources).
+1.add cmd GUI(Position, Tech, Resources).(done)
 2.change position to 2D.
 3.Player can choose to change position to acquired star.
+4.Attach time: a few round later. Log warning. Time may decrease while tech is high.
 
 ## V 1.0.0
 
