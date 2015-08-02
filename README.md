@@ -12,6 +12,7 @@ TODO:
 3.Player can choose to change position to acquired star.  
 4.Attack time: a few round later. Log warning. Time may decrease while tech is high.  
 5.Adjust properties to be more balanced.
+6.Random num is just pseudo random...
 
 ## V 1.0.0
 
