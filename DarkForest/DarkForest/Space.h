@@ -9,11 +9,9 @@
 
 class SolarSystem;
 
-namespace{
-	typedef SolarSystem * SolarSystemPtr;
-	typedef std::map<double,SolarSystemPtr> SpaceMap;
-	typedef std::map<double,SolarSystemPtr>::value_type SpaceMapValue;
-}
+typedef SolarSystem * SolarSystemPtr;
+typedef std::map<double,SolarSystemPtr> SpaceMap;
+typedef std::map<double,SolarSystemPtr>::value_type SpaceMapValue;
 
 class Space{
 private:
