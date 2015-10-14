@@ -32,8 +32,20 @@ namespace SystemTool{
 		return os.str() ;
 	};
 
+	template <typename T> std::string numToBars(T value){
+		//TODO: kind of risky here
+		int bar_num = int(value);	
+		std::string bars("[");
+		for(int i=0; i<bar_num; ++i)
+			bars += "+";
+		bars += "]";
+
+		return bars;
+	};
+
 	inline int genRandom(const int & max){
-		//std::srand(std::time(0));
+		//boost::this_thread::sleep(boost::posix_time::milliseconds(100));
+		//std::cout<<std::time(0)<<std::endl;
 		return 1 + std::rand() % max;
 	};
 }

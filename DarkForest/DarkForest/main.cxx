@@ -13,7 +13,7 @@
 #include "Space.h"
 
 int main(){
-	//std::srand(std::time(0));
+	std::srand(std::time(0));
 
 	Space this_space;
 
@@ -31,7 +31,7 @@ int main(){
 	system("cls");
 
 	while(true){
-		std::cout<<"-----------------------New Report-----------------------------"<<std::endl;
+		std::cout<<"-----------------------New Report---------------------------"<<std::endl;
 
 		for(std::vector<SolarSystem *>::iterator it=undeveloped_stars_ptr.begin();it!=undeveloped_stars_ptr.end();++it){
 			(*it)->takeAction();

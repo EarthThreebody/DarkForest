@@ -158,10 +158,10 @@ void SolarSystem::reportDetail(){
 	SystemTool::logInfo("Name:        ["+m_name+"]");
 	SystemTool::logInfo("State:       ["+state_report+"]");
 	SystemTool::logInfo("Position:    ["+SystemTool::toString(m_position)+"]");
-	SystemTool::logInfo("Tech:        ["+SystemTool::toString(m_tech)+"]");
-	SystemTool::logInfo("Resource:    ["+SystemTool::toString(m_resource)+"]");
-	SystemTool::logInfo("DevelopSpeed:["+SystemTool::toString(m_develop_speed)+"]");
-	SystemTool::logInfo("ExploreRange:["+SystemTool::toString(m_explore_range)+"]");
+	SystemTool::logInfo("Tech:        "+SystemTool::numToBars(m_tech)         +"["+SystemTool::toString(m_tech)+"]");
+	SystemTool::logInfo("Resource:    "+SystemTool::numToBars(m_resource)     +"["+SystemTool::toString(m_resource)+"]");
+	SystemTool::logInfo("DevelopSpeed:"+SystemTool::numToBars(m_develop_speed)+"["+SystemTool::toString(m_develop_speed)+"]");
+	SystemTool::logInfo("ExploreRange:"+SystemTool::numToBars(m_explore_range)+"["+SystemTool::toString(m_explore_range)+"]");
 }
 
 bool SolarSystem::dead(){
